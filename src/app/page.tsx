@@ -6,10 +6,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 const images = [
     '/images/events/temp1.png',
     '/images/events/temp2.png',
-    '/images/events/temp3.png',
-    '/images/events/temp4.png',
-    '/images/events/temp5.png',
-    '/images/events/temp6.png',
+    '/images/events/temp11.png',
+    '/images/events/temp12.png',
+    '/images/events/temp13.png',
 ];
 
 export default function HomePage() {
