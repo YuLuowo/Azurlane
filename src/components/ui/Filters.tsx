@@ -6,11 +6,11 @@ interface FiltersProps {
     setSelectedTypes: (types: string[]) => void;
     selectedRarity: string[];
     setSelectedRarity: (rarity: string[]) => void;
-    selectedFaction: string[];
-    setSelectedFaction: (factions: string[]) => void;
+    selectedNationality: string[];
+    setSelectedNationality: (factions: string[]) => void;
 }
 
-const Filters: React.FC<FiltersProps> = ({ selectedTypes, setSelectedTypes, selectedRarity, setSelectedRarity, selectedFaction, setSelectedFaction }) => {
+const Filters: React.FC<FiltersProps> = ({ selectedTypes, setSelectedTypes, selectedRarity, setSelectedRarity, selectedNationality, setSelectedNationality }) => {
 
     return (
         <div className="max-w-7xl p-4 border border-gray-300 rounded-lg mb-4">
@@ -28,9 +28,9 @@ const Filters: React.FC<FiltersProps> = ({ selectedTypes, setSelectedTypes, sele
             />
             <FilterCategory
                 title="陣營"
-                options={["白鷹", "皇家", "重櫻", "鐵血", "東煌", "薩丁帝國", "北方聯合", "自由鳶尾", "維希教廷", "其他", "颶風", "聯動"]}
-                selectedItems={selectedFaction}
-                onChange={setSelectedFaction}
+                options={["白鷹", "皇家", "重櫻", "鐵血", "東煌", "薩丁帝國", "北方聯合", "自由鳶尾", "維希教廷", "META", "颶風", "聯動"]}
+                selectedItems={selectedNationality}
+                onChange={setSelectedNationality}
             />
         </div>
     );

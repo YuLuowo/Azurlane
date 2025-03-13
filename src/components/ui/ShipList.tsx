@@ -3,7 +3,7 @@ import React from "react";
 interface Ship {
     name: string;
     painting: string;
-    nationality: string;
+    nationality: number;
     rarity: number;
     type: number;
     tag_list: string[];
@@ -22,7 +22,7 @@ const ShipList: React.FC<ShipListProps> = ({ ships, loading }) => {
                     <path d="M4 24C4 35.0457 12.9543 44 24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4"/>
                 </svg>
             ) : (
-                <div className="grid grid-cols-5 md:grid-cols-20 gap-4 mt-4">
+                <div className="grid grid-cols-5 md:grid-cols-17 gap-4 mt-4">
                     {ships.map((ship, index) => (
                         <div key={index} className="flex flex-col items-center hover:cursor-pointer">
                             <img

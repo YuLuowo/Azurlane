@@ -31,7 +31,6 @@ const FilterCategory: React.FC<FilterCategoryProps> = ({ title, options, selecte
             ? selectedItems.filter((i) => i !== item)
             : [...selectedItems, item];
 
-        console.log(item);
         onChange(newSelected);
     };
 
