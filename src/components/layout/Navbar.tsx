@@ -16,7 +16,7 @@ export default function Navbar() {
 
     return (
         <div className="flex justify-center items-center">
-            <div className="flex flex-col w-full max-w-7xl">
+            <div className="flex flex-col w-full max-w-7xl px-4">
                 <div className="flex items-center justify-between py-4">
                     <Link className="text-3xl font-bold" href="/">
                         碧藍航線 AzurLane

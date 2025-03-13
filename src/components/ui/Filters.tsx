@@ -10,16 +10,10 @@ interface FiltersProps {
     setSelectedFaction: (factions: string[]) => void;
 }
 
-const Filters: React.FC<FiltersProps> = ({
-    selectedTypes,
-    setSelectedTypes,
-    selectedRarity,
-    setSelectedRarity,
-    selectedFaction,
-    setSelectedFaction,
-}) => {
+const Filters: React.FC<FiltersProps> = ({ selectedTypes, setSelectedTypes, selectedRarity, setSelectedRarity, selectedFaction, setSelectedFaction }) => {
+
     return (
-        <div className="w-full max-w-7xl p-4 border border-gray-500 rounded-lg">
+        <div className="max-w-7xl p-4 border border-gray-300 rounded-lg mb-4">
             <FilterCategory
                 title="類型"
                 options={["前排先鋒", "後排主力", "驅逐", "輕巡", "重巡", "超巡", "戰巡", "戰列", "航戰", "航母", "輕航", "重砲", "維修", "潛艇", "潛母", "運輸", "風帆"]}
