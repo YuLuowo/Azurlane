@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from "react";
-import Filters from "@/components/ui/Filters";
+import ShipFilters from "@/components/ui/ShipFilters";
 import {fetchShipData} from "@/utils/api";
 import ShipList from "@/components/ui/ShipList";
 
@@ -82,7 +82,7 @@ export default function ShipPage() {
 
     return (
         <div className="flex flex-col justify-center items-center px-4 py-8">
-            <Filters
+            <ShipFilters
                 selectedTypes={selectedTypes}
                 setSelectedTypes={setSelectedTypes}
                 selectedRarity={selectedRarity}

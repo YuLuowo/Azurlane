@@ -1,7 +1,7 @@
 import React from "react";
 import FilterCategory from "@/components/ui/FilterCategory";
 
-interface FiltersProps {
+interface EquipmentFiltersProps {
     selectedTypes: string[];
     setSelectedTypes: (types: string[]) => void;
     selectedRarity: string[];
@@ -10,25 +10,25 @@ interface FiltersProps {
     setSelectedNationality: (factions: string[]) => void;
 }
 
-const Filters: React.FC<FiltersProps> = ({ selectedTypes, setSelectedTypes, selectedRarity, setSelectedRarity, selectedNationality, setSelectedNationality }) => {
+const EquipmentFilters: React.FC<EquipmentFiltersProps> = ({ selectedTypes, setSelectedTypes, selectedRarity, setSelectedRarity, selectedNationality, setSelectedNationality }) => {
 
     return (
         <div className="max-w-7xl p-4 border border-gray-300 rounded-lg mb-4">
             <FilterCategory
                 title="類型"
-                options={["前排先鋒", "後排主力", "驅逐", "輕巡", "重巡", "超巡", "戰巡", "戰列", "航戰", "航母", "輕航", "重砲", "維修", "潛艇", "潛母", "運輸", "風帆"]}
+                options={["驅逐炮", "輕巡炮", "重巡炮", "超巡炮", "戰列炮", "速科夫炮", "水面魚雷", "潛艇魚雷", "防空炮", "導彈", "戰鬥機", "轟炸機", "魚雷機", "水上機", "反潛機", "設備", "特殊兵裝"]}
                 selectedItems={selectedTypes}
                 onChange={setSelectedTypes}
             />
             <FilterCategory
                 title="稀有度"
-                options={["普通", "稀有", "精銳", "超稀有", "海上傳奇", "最高方案", "決戰方案"]}
+                options={["普通", "稀有", "精銳", "超稀有", "海上傳奇"]}
                 selectedItems={selectedRarity}
                 onChange={setSelectedRarity}
             />
             <FilterCategory
                 title="陣營"
-                options={["白鷹", "皇家", "重櫻", "鐵血", "東煌", "薩丁帝國", "北方聯合", "自由鳶尾", "維希教廷", "META", "颶風", "聯動"]}
+                options={["白鷹", "皇家", "重櫻", "鐵血", "東煌", "薩丁帝國", "北方聯合", "自由鳶尾", "維希教廷", "其它", "颶風", "聯動"]}
                 selectedItems={selectedNationality}
                 onChange={setSelectedNationality}
             />
@@ -36,4 +36,4 @@ const Filters: React.FC<FiltersProps> = ({ selectedTypes, setSelectedTypes, sele
     );
 };
 
-export default Filters;
+export default EquipmentFilters;
