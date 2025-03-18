@@ -16,7 +16,7 @@ const EquipmentFilters: React.FC<EquipmentFiltersProps> = ({ selectedTypes, setS
         <div className="max-w-7xl p-4 border border-gray-300 rounded-lg mb-4">
             <FilterCategory
                 title="類型"
-                options={["驅逐炮", "輕巡炮", "重巡炮", "超巡炮", "戰列炮", "速科夫炮", "水面魚雷", "潛艇魚雷", "防空炮", "導彈", "戰鬥機", "轟炸機", "魚雷機", "水上機", "反潛機", "設備", "特殊兵裝"]}
+                options={["驅逐炮", "輕巡炮", "重巡炮", "超巡炮", "戰列炮", "水面魚雷", "潛艇魚雷", "防空炮", "導彈", "戰鬥機", "轟炸機", "魚雷機", "水上機", "反潛機", "設備"]}
                 selectedItems={selectedTypes}
                 onChange={setSelectedTypes}
             />

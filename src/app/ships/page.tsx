@@ -91,7 +91,6 @@ export default function ShipPage() {
                 setSelectedNationality={setSelectedNationality}
             />
 
-            {/* TODO: 中文轉數字 bug */}
             <ShipList ships={filteredShipData} loading={loading} />
         </div>
     );

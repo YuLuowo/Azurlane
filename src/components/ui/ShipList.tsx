@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 interface Ship {
     name: string;
@@ -25,12 +26,15 @@ const ShipList: React.FC<ShipListProps> = ({ ships, loading }) => {
                 <div className="grid grid-cols-5 xl:grid-cols-17 lg:grid-cols-14 md:grid-cols-10 gap-4 mt-4">
                     {ships.map((ship, index) => (
                         <div key={index} className="flex flex-col items-center hover:cursor-pointer">
-                            <img
-                                src={`/images/squareicon/${ship.painting}.png`}
-                                alt={ship.name}
-                                className="max-w-15 max-h-15 object-cover border-2 border-gray-500 rounded-lg hover:border-blue-500 hover:border-3"
-                            />
-                            <span className="mt-2 text-center text-xs w-15 truncate">{ship.name}</span>
+                            <Link className="text-center text-xs w-15 truncate" href={`/ships/${encodeURIComponent(ship.name)}`} passHref>
+                                <img
+                                    src={`/images/squareicon/${ship.painting}.png`}
+                                    alt={ship.name}
+                                    className="max-w-15 max-h-15 object-cover border-2 border-gray-500 hover:border-blue-500 hover:border-3"
+                                />
+                                <span>{ship.name}</span>
+                            </Link>
+
                         </div>
                     ))}
                 </div>
