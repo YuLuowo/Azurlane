@@ -1,6 +1,6 @@
 import React from 'react';
 import { cva, type VariantProps} from "class-variance-authority";
-import { cn } from "@/libs/utils"; // 假設你有 cn 這個工具函式
+import { cn } from "@/libs/utils";
 
 const buttonVariants = cva(
     "inline-flex items-center justify-center rounded-md font-medium transition-colors",
