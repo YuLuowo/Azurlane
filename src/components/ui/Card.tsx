@@ -10,7 +10,7 @@ const cardVariants = cva(
                 default: 'bg-white text-gray-800',
                 primary: 'bg-blue-500 text-white',
                 secondary: 'bg-gray-100 text-gray-800',
-                quickAccess: 'p-4 bg-gray-100 border-2 border-blue-200 hover:bg-gray-200 hover:cursor-pointer',
+                quickAccess: 'p-2 bg-gray-100 border-2 border-blue-200 hover:bg-gray-200 hover:cursor-pointer',
                 events: 'rounded-xl bg-blue-50'
             },
             size: {
