@@ -1,7 +1,7 @@
 'use client'
 import React, {useEffect, useState} from "react";
 import EquipmentFilters from "@/components/ui/EquipmentFilters";
-import {fetchEquipmentData} from "@/utils/api";
+import {fetchEquipmentData} from "@/utils/fetch_data";
 import EquipmentList from "@/components/ui/EquipmentList";
 
 export default function EquipmentPage() {

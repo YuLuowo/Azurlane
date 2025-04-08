@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from "react";
 import ShipFilters from "@/components/ui/ShipFilters";
-import {fetchShipData} from "@/utils/api";
+import {fetchShipData} from "@/utils/fetch_data";
 import ShipList from "@/components/ui/ShipList";
 
 
