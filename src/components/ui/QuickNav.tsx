@@ -2,7 +2,10 @@
 
 import React from "react";
 
-interface QuickNavProps {}
+interface QuickNavProps {
+    imageSrc?: string;
+    imageAlt?: string;
+}
 
 const scrollToSection = (id: string) => {
     const section = document.getElementById(id);
@@ -11,53 +14,38 @@ const scrollToSection = (id: string) => {
     }
 };
 
-const QuickNav: React.FC<QuickNavProps> = () => {
+const QuickNav: React.FC<QuickNavProps> = ({ imageSrc, imageAlt = "裝飾圖片" }) => {
     return (
-        <div className="bg-gray-300 text-black rounded-md p-4">
-            <h4 className="text-xl font-bold mb-4">快速瀏覽</h4>
+        <div className="bg-gray-200 dark:bg-gray-600 rounded-md p-4 relative">
+            <h4 className="text-2xl font-bold mb-4">快速瀏覽</h4>
             <ul className="flex flex-col gap-2">
-                <li>
-                    <a href="#intro" onClick={(e) => {
-                        e.preventDefault();
-                        scrollToSection("intro");
-                    }}>
-                        <span className="text-blue-600 hover:text-blue-500 text-lg">艦船介紹</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#skill" onClick={(e) => {
-                        e.preventDefault();
-                        scrollToSection("skill");
-                    }}>
-                        <span className="text-blue-600 hover:text-blue-500 text-lg">艦船技能</span>
-                    </a>
-                </li>
-                { /** TODO: 判斷該船是否有改造 */ }
-                <li>
-                    <a href="#trans" onClick={(e) => {
-                        e.preventDefault();
-                        scrollToSection("trans");
-                    }}>
-                        <span className="text-blue-600 hover:text-blue-500 text-lg">艦船改造</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#equip" onClick={(e) => {
-                        e.preventDefault();
-                        scrollToSection("equip");
-                    }}>
-                        <span className="text-blue-600 hover:text-blue-500 text-lg">艦船裝備</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#compare" onClick={(e) => {
-                        e.preventDefault();
-                        scrollToSection("compare");
-                    }}>
-                        <span className="text-blue-600 hover:text-blue-500 text-lg">艦船比對</span>
-                    </a>
-                </li>
+                {[
+                    { id: "intro", label: "艦船介紹" },
+                    { id: "skill", label: "艦船技能" },
+                    { id: "trans", label: "艦船改造" },
+                    { id: "equip", label: "艦船裝備" },
+                    { id: "compare", label: "艦船比對" },
+                ].map((item) => (
+                    <li key={item.id}>
+                        <a href={`#${item.id}`} onClick={(e) => {
+                            e.preventDefault();
+                            scrollToSection(item.id);
+                        }}>
+                            <span className="text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 text-xl">
+                                {item.label}
+                            </span>
+                        </a>
+                    </li>
+                ))}
             </ul>
+
+            {imageSrc && (
+                <img
+                    src={imageSrc}
+                    alt={imageAlt}
+                    className="absolute bottom-4 right-4 w-28 h-28 object-contain transition-all duration-300 transform hover:scale-110 hover:rotate-3 cursor-pointer"
+                />
+            )}
         </div>
     );
 };

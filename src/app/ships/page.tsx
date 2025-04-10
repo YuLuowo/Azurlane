@@ -1,9 +1,8 @@
 'use client'
 import React, { useState, useEffect } from "react";
 import ShipFilters from "@/components/ui/ShipFilters";
-import {fetchShipData} from "@/utils/fetch_data";
 import ShipList from "@/components/ui/ShipList";
-
+import {nationalityMap, rarityMap, typeMap} from "@/utils/shipMaps";
 
 export default function ShipPage() {
     const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
@@ -16,57 +15,23 @@ export default function ShipPage() {
     useEffect(() => {
         async function loadData() {
             setLoading(true);
-            const ships = await fetchShipData();
-            setShipData(ships);
-            setLoading(false);
+            try {
+                const ships = await fetch(`/api/ship`);
+                if (!ships.ok) {
+                    throw new Error('Failed to fetch ships data')
+                }
+
+                const data = await ships.json();
+                setShipData(data);
+            } catch (error) {
+                console.error('Failed to fetch ships data.', error);
+            } finally {
+                setLoading(false);
+            }
         }
         loadData();
     }, []);
 
-    const typeMap: { [key: string]: number[] } = {
-        "前排先鋒": [1, 2, 3, 18, 19],
-        "後排主力": [4, 5, 10, 7, 6, 13, 12],
-        "驅逐": [1],
-        "輕巡": [2],
-        "重巡": [3],
-        "超巡": [18],
-        "戰巡": [4],
-        "戰列": [5],
-        "航戰": [10],
-        "航母": [7],
-        "輕航": [6],
-        "重砲": [13],
-        "維修": [12],
-        "潛艇": [8],
-        "潛母": [17],
-        "運輸": [19],
-        "風帆": [22, 23, 24]
-    };
-
-    const rarityMap: { [key: string]: (ship: { rarity: number, tag_list: string[] }) => boolean } = {
-        "普通": (ship) => ship.rarity === 2,
-        "稀有": (ship) => ship.rarity === 3,
-        "精銳": (ship) => ship.rarity === 4,
-        "超稀有": (ship) => ship.rarity === 5,
-        "海上傳奇": (ship) => ship.rarity === 6,
-        "最高方案": (ship) => ship.rarity === 5 && ship.tag_list.includes("Plan-Class"),
-        "決戰方案": (ship) => ship.rarity === 6 && ship.tag_list.includes("Plan-Class"),
-    };
-
-    const nationalityMap: { [key: string]: number[] } = {
-        "白鷹": [1],
-        "皇家": [2],
-        "重櫻": [3],
-        "鐵血": [4],
-        "東煌": [5],
-        "薩丁帝國": [6],
-        "北方聯合": [7],
-        "自由鳶尾": [8],
-        "維希教廷": [9],
-        "META": [97],
-        "颶風": [96],
-        "聯動": [106, 107, 108, 109, 110, 111]
-    };
 
     const selectedTypeNumbers = selectedTypes.flatMap(type => typeMap[type]);
     const selectedRarityNumbers = selectedRarity.map(rarity => rarityMap[rarity]);

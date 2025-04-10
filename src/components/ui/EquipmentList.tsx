@@ -31,7 +31,7 @@ const EquipmentList: React.FC<EquipmentListProps> = ({ equips, loading }) => {
                                     className="absolute inset-0 w-full h-full object-cover"
                                 />
                                 <img
-                                    src={`/images/equips/${equip.icon}.png`}
+                                    src={`https://cdn.imagineyuluo.com/AzurLane/TW/equips/${equip.icon}.png`}
                                     alt={equip.name}
                                     className="absolute inset-0 w-full h-full object-contain"
                                 />

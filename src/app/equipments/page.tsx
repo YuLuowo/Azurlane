@@ -1,7 +1,6 @@
 'use client'
 import React, {useEffect, useState} from "react";
 import EquipmentFilters from "@/components/ui/EquipmentFilters";
-import {fetchEquipmentData} from "@/utils/fetch_data";
 import EquipmentList from "@/components/ui/EquipmentList";
 
 export default function EquipmentPage() {
@@ -15,9 +14,19 @@ export default function EquipmentPage() {
     useEffect(() => {
         async function loadData() {
             setLoading(true);
-            const data = await fetchEquipmentData();
-            setEquipmentData(data);
-            setLoading(false);
+            try {
+                const equips = await fetch(`/api/equip`);
+                if (!equips.ok) {
+                    throw new Error('Failed to fetch equips data')
+                }
+
+                const data = await equips.json();
+                setEquipmentData(data);
+            } catch (error) {
+                console.error('Failed to fetch equips data.', error);
+            } finally {
+                setLoading(false);
+            }
         }
         loadData();
     }, []);
