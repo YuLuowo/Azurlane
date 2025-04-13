@@ -16,7 +16,6 @@ interface ShipListProps {
 }
 
 const ShipList: React.FC<ShipListProps> = ({ ships, loading }) => {
-
     const specialShips: { [key: string]: string } = {
         'z1': 'Z1',
         'z18': 'Z18',
@@ -50,9 +49,14 @@ const ShipList: React.FC<ShipListProps> = ({ ships, loading }) => {
     return (
         <div className="p-6">
             {loading ? (
-                <svg className="animate-spin stroke-black dark:stroke-white fill-white dark:fill-black" height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 24C4 35.0457 12.9543 44 24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4"/>
-                </svg>
+                <div className="grid grid-cols-5 xl:grid-cols-17 lg:grid-cols-14 md:grid-cols-10 gap-4 mt-4">
+                    {Array.from({ length: 102 }).map((_, index) => (
+                        <div key={index} className="flex flex-col items-center">
+                            <div className="w-15 h-15 bg-gray-300 animate-pulse rounded border-2 border-gray-500" />
+                            <div className="mt-1 w-15 h-3 bg-gray-300 animate-pulse rounded" />
+                        </div>
+                    ))}
+                </div>
             ) : (
                 <div className="grid grid-cols-5 xl:grid-cols-17 lg:grid-cols-14 md:grid-cols-10 gap-4 mt-4">
                     {ships.map((ship, index) => (
@@ -65,7 +69,6 @@ const ShipList: React.FC<ShipListProps> = ({ ships, loading }) => {
                                 />
                                 <span>{ship.name}</span>
                             </Link>
-
                         </div>
                     ))}
                 </div>

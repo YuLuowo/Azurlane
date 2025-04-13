@@ -21,7 +21,6 @@ const QuickNav: React.FC<QuickNavProps> = ({ imageSrc, imageAlt = "裝飾圖片"
             <ul className="flex flex-col gap-2">
                 {[
                     { id: "intro", label: "艦船介紹" },
-                    { id: "skill", label: "艦船技能" },
                     { id: "trans", label: "艦船改造" },
                     { id: "equip", label: "艦船裝備" },
                     { id: "compare", label: "艦船比對" },
@@ -43,7 +42,7 @@ const QuickNav: React.FC<QuickNavProps> = ({ imageSrc, imageAlt = "裝飾圖片"
                 <img
                     src={imageSrc}
                     alt={imageAlt}
-                    className="absolute bottom-4 right-4 w-28 h-28 object-contain transition-all duration-300 transform hover:scale-110 hover:rotate-3 cursor-pointer"
+                    className="absolute bottom-4 right-4 w-28 h-28 object-contain"
                 />
             )}
         </div>

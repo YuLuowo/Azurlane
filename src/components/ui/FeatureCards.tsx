@@ -5,9 +5,9 @@ import Card from '@/components/ui/Card';
 export default function FeatureCards() {
     const cards = [
         {
-            title: '綻放於輝光之城',
-            image: '/images/activitybanner/temp4.png',
-            description: '活動時間為 2025-03-20 至 2025-04-10',
+            title: '颶風與沉眠之海',
+            image: `https://cdn.imagineyuluo.com/AzurLane/TW/activitybanner/temp10.png`,
+            description: '活動時間為 2025-04-10 至 2025-04-24',
         },
     ];
 

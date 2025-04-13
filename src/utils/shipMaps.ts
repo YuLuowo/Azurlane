@@ -59,7 +59,7 @@ export function getTypeNames(typeId: number): string[] {
 
 export function getNationalityName(nationalityId: number): string {
     const entry = Object.entries(nationalityMap).find(([, ids]) => ids.includes(nationalityId));
-    return entry ? entry[0] : "Unknown";
+    return entry ? entry[0] : "無";
 }
 
 export function getRarityLabels(ship: Ship): string[] {

@@ -46,7 +46,7 @@ export default function TestPage() {
                     ships.map(async (ship) => {
                         const { painting } = ship;
                         const status = {
-                            painting: await checkImageExists(`${cdnBaseUrls.painting}${painting}.png`),
+                            painting: await checkImageExists(`${cdnBaseUrls.painting}${painting.toLowerCase()}.png`),
                             shipmodels: await checkImageExists(`${cdnBaseUrls.shipmodels}${painting}.png`),
                             qicon: await checkImageExists(`${cdnBaseUrls.qicon}${painting}.png`),
                             shipyardicon: await checkImageExists(`${cdnBaseUrls.shipyardicon}${painting}.png`),

@@ -11,7 +11,8 @@ const cardVariants = cva(
                 primary: 'bg-blue-500 text-white',
                 secondary: 'bg-gray-100 text-gray-800',
                 quickAccess: 'p-2 bg-gray-100 border-2 border-blue-200 hover:bg-gray-200 hover:cursor-pointer',
-                events: 'rounded-xl bg-blue-50'
+                events: 'rounded-xl bg-blue-50',
+                stats: 'flex flex-col gap-3 bg-gray-100 dark:bg-gray-700 p-4',
             },
             size: {
                 sm: 'text-sm',
