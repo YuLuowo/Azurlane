@@ -3,14 +3,28 @@ import TitledSection from "@/components/ui/TitleSection";
 import QuickNav from "@/components/ui/QuickNav";
 import React, {use, useEffect, useState} from "react";
 import {Ship, getNationalityName, getTypeNames, getRarityLabels} from "@/utils/shipMaps";
-import StatsCard from "@/components/ui/StatsCard";
 import StatsOverview from "@/components/ui/StatsOverview";
 import Card from "@/components/ui/Card";
 
 export default function ShipPage({params}: { params: Promise<{ shipName: string }> }) {
+
+    interface Skill {
+        name: string;
+        desc: string;
+    }
+
+    interface ShipData {
+        shipName: string;
+        group_type: number;
+        painting: string;
+    }
+
+
     const [shipData, setShipData] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [decodedShipName, setDecodedShipName] = useState<string | null>(null);
+    const [skills, setSkills] = useState<Skill[]>([]);
+
 
     const {shipName} = use(params);
 
@@ -40,6 +54,26 @@ export default function ShipPage({params}: { params: Promise<{ shipName: string 
 
         fetchShipData();
     }, [decodedShipName]);
+
+    useEffect(() => {
+        if (!decodedShipName) return;
+
+        const fetchSkillsData = async () => {
+            try {
+                const response = await fetch(`/api/ship/${decodedShipName}/skills`);
+                if (!response.ok) {
+                    throw new Error("Failed to fetch skills data");
+                }
+                const data: { skills: Skill[] } = await response.json();
+                setSkills(data.skills);
+            } catch (error) {
+                console.error("Error fetching skills data:", error);
+            }
+        };
+
+        fetchSkillsData();
+    }, [decodedShipName]);
+
 
     const statsData = [
         { value: 0, icon: "/images/stats/hp.webp", label: "耐久" },
@@ -137,47 +171,24 @@ export default function ShipPage({params}: { params: Promise<{ shipName: string 
                                 </div>
 
                                 <div className="flex flex-col gap-3 bg-gray-100 dark:bg-gray-700 rounded-lg p-5 w-full">
-                                    {/* TODO: 技能版面 */}
-                                    <div className="flex flex-row items-center gap-3">
-                                        <img
-                                            src={`https://cdn.imagineyuluo.com/AzurLane/TW/squareicon/${shipData.painting}.png`}
-                                            alt={shipData.painting}
-                                            className="max-w-16 max-h-16"
-                                        />
-                                        <div className="break-words">
-                                            <span>技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述</span>
+                                    {shipData && skills.length > 0 && (
+                                        <div className="flex flex-col gap-4">
+                                            <h2 className="text-xl font-bold">技能列表</h2>
+                                            {skills.map((skill, index) => (
+                                                <div key={index} className="flex flex-row items-center gap-3">
+                                                    <img
+                                                        src={`https://cdn.imagineyuluo.com/AzurLane/TW/squareicon/${shipData.painting}.png`}
+                                                        alt={shipData.painting}
+                                                        className="max-w-16 max-h-16"
+                                                    />
+                                                    <div className="break-words">
+                                                        <h4 className="font-semibold">{skill.name}</h4>
+                                                        <span className="text-sm text-gray-600">{skill.desc}</span>
+                                                    </div>
+                                                </div>
+                                            ))}
                                         </div>
-                                    </div>
-                                    <div className="flex flex-row items-center gap-3">
-                                        <img
-                                            src={`https://cdn.imagineyuluo.com/AzurLane/TW/squareicon/${shipData.painting}.png`}
-                                            alt={shipData.painting}
-                                            className="max-w-16 max-h-16"
-                                        />
-                                        <div className="break-words">
-                                            <span>技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述</span>
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-row items-center gap-3">
-                                        <img
-                                            src={`https://cdn.imagineyuluo.com/AzurLane/TW/squareicon/${shipData.painting}.png`}
-                                            alt={shipData.painting}
-                                            className="max-w-16 max-h-16"
-                                        />
-                                        <div className="break-words">
-                                            <span>技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述</span>
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-row items-center gap-3">
-                                        <img
-                                            src={`https://cdn.imagineyuluo.com/AzurLane/TW/squareicon/${shipData.painting}.png`}
-                                            alt={shipData.painting}
-                                            className="max-w-16 max-h-16"
-                                        />
-                                        <div className="break-words">
-                                            <span>技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述技能敘述</span>
-                                        </div>
-                                    </div>
+                                    )}
                                 </div>
                             </div>
                         </TitledSection>
