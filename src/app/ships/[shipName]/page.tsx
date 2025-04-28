@@ -183,7 +183,7 @@ export default function ShipPage({params}: { params: Promise<{ shipName: string 
                                                     />
                                                     <div className="break-words">
                                                         <h4 className="font-semibold">{skill.name}</h4>
-                                                        <span className="text-sm text-gray-600">{skill.desc}</span>
+                                                        <span className="text-sm text-gray-600 dark:text-gray-300">{skill.desc}</span>
                                                     </div>
                                                 </div>
                                             ))}
