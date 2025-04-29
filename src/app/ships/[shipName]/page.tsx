@@ -9,6 +9,7 @@ import Card from "@/components/ui/Card";
 export default function ShipPage({params}: { params: Promise<{ shipName: string }> }) {
 
     interface Skill {
+        id: number;
         name: string;
         desc: string;
     }
@@ -16,6 +17,7 @@ export default function ShipPage({params}: { params: Promise<{ shipName: string 
     interface ShipData {
         shipName: string;
         group_type: number;
+        trans: boolean;
         painting: string;
     }
 
@@ -141,30 +143,30 @@ export default function ShipPage({params}: { params: Promise<{ shipName: string 
                                 <div className="flex flex-col gap-4 w-full max-w-96">
                                     <Card variant="stats" className="rounded-sm">
                                         <div className="flex flex-col gap-2">
-                                            <h4 className="text-lg font-bold">名稱</h4>
-                                            <span>{shipData.name}</span>
+                                            <h4 className="text-xl font-bold">名稱</h4>
+                                            <span className="text-lg text-gray-600 dark:text-gray-300">{shipData.name}</span>
                                         </div>
                                     </Card>
 
                                     <Card variant="stats" className="rounded-sm">
                                         <div className="flex flex-col gap-2">
-                                            <h4 className="text-lg font-bold">種類</h4>
-                                            <span>{getTypeNames(shipData.type).join(" / ")}</span>
+                                            <h4 className="text-xl font-bold">種類</h4>
+                                            <span className="text-lg text-gray-600 dark:text-gray-300">{getTypeNames(shipData.type).join(" / ")}</span>
                                         </div>
                                     </Card>
 
                                     <div className="flex flex-row gap-4 w-full">
                                         <Card variant="stats" className="rounded-sm w-full">
                                             <div className="flex flex-col gap-2">
-                                                <h4 className="text-lg font-bold">稀有度</h4>
-                                                <span>{getRarityLabels(shipData).join(" / ")}</span>
+                                                <h4 className="text-xl font-bold">稀有度</h4>
+                                                <span className="text-lg text-gray-600 dark:text-gray-300">{getRarityLabels(shipData).join(" / ")}</span>
                                             </div>
                                         </Card>
 
                                         <Card variant="stats" className="rounded-sm w-full">
                                             <div className="flex flex-col gap-2">
-                                                <h4 className="text-lg font-bold">所屬陣營</h4>
-                                                <span>{getNationalityName(shipData.nationality)}</span>
+                                                <h4 className="text-xl font-bold">所屬陣營</h4>
+                                                <span className="text-lg text-gray-600 dark:text-gray-300">{getNationalityName(shipData.nationality)}</span>
                                             </div>
                                         </Card>
                                     </div>
@@ -177,13 +179,13 @@ export default function ShipPage({params}: { params: Promise<{ shipName: string 
                                             {skills.map((skill, index) => (
                                                 <div key={index} className="flex flex-row items-center gap-3">
                                                     <img
-                                                        src={`https://cdn.imagineyuluo.com/AzurLane/TW/squareicon/${shipData.painting}.png`}
-                                                        alt={shipData.painting}
+                                                        src={`https://cdn.imagineyuluo.com/AzurLane/TW/skillicon/${skill.id}.png`}
+                                                        alt={skill.name}
                                                         className="max-w-16 max-h-16"
                                                     />
                                                     <div className="break-words">
-                                                        <h4 className="font-semibold">{skill.name}</h4>
-                                                        <span className="text-sm text-gray-600 dark:text-gray-300">{skill.desc}</span>
+                                                        <h4 className="font-semibold text-lg">{skill.name}</h4>
+                                                        <span className="text text-gray-600 dark:text-gray-300">{skill.desc}</span>
                                                     </div>
                                                 </div>
                                             ))}
@@ -194,9 +196,11 @@ export default function ShipPage({params}: { params: Promise<{ shipName: string 
                         </TitledSection>
 
                         { /** TODO: 判斷該船是否有改造 */}
-                        <TitledSection id="trans" title="艦船改造">
-                            123
-                        </TitledSection>
+                        { shipData.trans && (
+                            <TitledSection id="trans" title="艦船改造">
+                                123
+                            </TitledSection>
+                        ) }
 
                         <TitledSection id="equip" title="艦船裝備">
                             <div className="flex flex-col md:flex-row md:justify-center gap-4 w-full items-center">
