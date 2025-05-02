@@ -10,6 +10,7 @@ export default function ShipPage({params}: { params: Promise<{ shipName: string 
 
     interface Skill {
         id: number;
+        icon: number;
         name: string;
         desc: string;
     }
@@ -38,42 +39,29 @@ export default function ShipPage({params}: { params: Promise<{ shipName: string 
     useEffect(() => {
         if (!decodedShipName) return;
 
-        const fetchShipData = async () => {
+        const fetchShipAndSkills = async () => {
             setLoading(true);
             try {
-                const response = await fetch(`/api/ship/${decodedShipName}`);
-                if (!response.ok) {
-                    throw new Error("Failed to fetch ship data");
-                }
-                const data = await response.json();
-                setShipData(data);
+                const shipRes = await fetch(`/api/ship/${decodedShipName}`);
+                if (!shipRes.ok) throw new Error("Failed to fetch ship data");
+
+                const shipData = await shipRes.json();
+                setShipData(shipData);
+
+                const skillsRes = await fetch(`/api/ship/${decodedShipName}/skills`);
+                if (!skillsRes.ok) throw new Error("Failed to fetch skills data");
+
+                const skillsData = await skillsRes.json();
+                const finalSkills = shipData.trans ? skillsData.trans_skills : skillsData.skills;
+                setSkills(finalSkills);
             } catch (error) {
-                console.error("Error fetching ship data:", error);
+                console.error("Error fetching ship or skills data:", error);
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchShipData();
-    }, [decodedShipName]);
-
-    useEffect(() => {
-        if (!decodedShipName) return;
-
-        const fetchSkillsData = async () => {
-            try {
-                const response = await fetch(`/api/ship/${decodedShipName}/skills`);
-                if (!response.ok) {
-                    throw new Error("Failed to fetch skills data");
-                }
-                const data: { skills: Skill[] } = await response.json();
-                setSkills(data.skills);
-            } catch (error) {
-                console.error("Error fetching skills data:", error);
-            }
-        };
-
-        fetchSkillsData();
+        fetchShipAndSkills();
     }, [decodedShipName]);
 
 
@@ -120,7 +108,7 @@ export default function ShipPage({params}: { params: Promise<{ shipName: string 
                 ) : (
                     <>
                         <QuickNav imageSrc={`https://cdn.imagineyuluo.com/AzurLane/TW/qicon/${shipData.painting}.png`}
-                                  imageAlt={shipData.painting}/>
+                                  imageAlt={shipData.painting} hasTrans={shipData.trans}/>
 
                         <TitledSection id="intro" title="艦船介紹">
                             <div
@@ -175,11 +163,14 @@ export default function ShipPage({params}: { params: Promise<{ shipName: string 
                                 <div className="flex flex-col gap-3 bg-gray-100 dark:bg-gray-700 rounded-lg p-5 w-full">
                                     {shipData && skills.length > 0 && (
                                         <div className="flex flex-col gap-4">
-                                            <h2 className="text-xl font-bold">技能列表</h2>
+                                            <h2 className="text-xl font-bold">
+                                                技能列表
+                                                {shipData?.trans && <span>(改造後)</span>}
+                                            </h2>
                                             {skills.map((skill, index) => (
                                                 <div key={index} className="flex flex-row items-center gap-3">
                                                     <img
-                                                        src={`https://cdn.imagineyuluo.com/AzurLane/TW/skillicon/${skill.id}.png`}
+                                                        src={`https://cdn.imagineyuluo.com/AzurLane/TW/skillicon/${skill.icon}.png`}
                                                         alt={skill.name}
                                                         className="max-w-16 max-h-16"
                                                     />

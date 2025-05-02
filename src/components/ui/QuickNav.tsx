@@ -5,6 +5,7 @@ import React from "react";
 interface QuickNavProps {
     imageSrc?: string;
     imageAlt?: string;
+    hasTrans?: boolean;
 }
 
 const scrollToSection = (id: string) => {
@@ -14,14 +15,14 @@ const scrollToSection = (id: string) => {
     }
 };
 
-const QuickNav: React.FC<QuickNavProps> = ({ imageSrc, imageAlt = "裝飾圖片" }) => {
+const QuickNav: React.FC<QuickNavProps> = ({ imageSrc, imageAlt, hasTrans }) => {
     return (
         <div className="bg-gray-200 dark:bg-gray-600 rounded-md p-4 relative">
             <h4 className="text-2xl font-bold mb-4">快速瀏覽</h4>
             <ul className="flex flex-col gap-2">
                 {[
                     { id: "intro", label: "艦船介紹" },
-                    { id: "trans", label: "艦船改造" },
+                    ...(hasTrans ? [{ id: "trans", label: "艦船改造" }] : []),
                     { id: "equip", label: "艦船裝備" },
                     { id: "compare", label: "艦船比對" },
                 ].map((item) => (
